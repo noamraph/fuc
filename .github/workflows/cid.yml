@@ -47,7 +47,7 @@ jobs:
           key: ${{ runner.os }}-cargo-test-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-cargo-
       - name: Run tests
-        run: cargo test --workspace
+        run: RUST_BACKTRACE=1 cargo test --workspace
 
   deploy_release:
     needs: [build, test]
