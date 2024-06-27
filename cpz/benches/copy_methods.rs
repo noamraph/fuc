@@ -33,7 +33,7 @@ impl NormalTempFile {
 
         open_standard(
             &from,
-            #[cfg(target_os = "linux")]
+            #[cfg(target_os = "linuxXXX")]
             direct_io,
         )
         .write_all(&buf)
@@ -97,7 +97,7 @@ fn empty_files(c: &mut Criterion) {
         );
     });
 
-    #[cfg(target_os = "linux")]
+    #[cfg(target_os = "linuxXXX")]
     group.bench_function("mknod", |b| {
         b.iter_batched(
             || NormalTempFile::create(0, false),
@@ -119,7 +119,7 @@ fn empty_files(c: &mut Criterion) {
         );
     });
 
-    #[cfg(target_os = "linux")]
+    #[cfg(target_os = "linuxXXX")]
     group.bench_function("mknodat", |b| {
         b.iter_batched(
             || {
@@ -214,7 +214,7 @@ fn just_writes(c: &mut Criterion) {
                     |(dir, buf)| {
                         let mut out = open_standard(
                             dir.path().join("file").as_ref(),
-                            #[cfg(target_os = "linux")]
+                            #[cfg(target_os = "linuxXXX")]
                             true,
                         );
                         out.set_len(num_files).unwrap();
@@ -247,7 +247,7 @@ fn add_benches(group: &mut BenchmarkGroup<WallTime>, num_bytes: u64, direct_io: 
         },
     );
 
-    #[cfg(target_os = "linux")]
+    #[cfg(target_os = "linuxXXX")]
     group.bench_with_input(
         BenchmarkId::new("copy_file_range", num_bytes),
         &num_bytes,
@@ -445,7 +445,7 @@ fn add_benches(group: &mut BenchmarkGroup<WallTime>, num_bytes: u64, direct_io: 
         },
     );
 
-    #[cfg(target_os = "linux")]
+    #[cfg(target_os = "linuxXXX")]
     group.bench_with_input(
         BenchmarkId::new("mmap_read_only_fallocate", num_bytes),
         &num_bytes,
@@ -495,7 +495,7 @@ fn add_benches(group: &mut BenchmarkGroup<WallTime>, num_bytes: u64, direct_io: 
         },
     );
 
-    #[cfg(target_os = "linux")]
+    #[cfg(target_os = "linuxXXX")]
     group.bench_with_input(
         BenchmarkId::new("sendfile", num_bytes),
         &num_bytes,
@@ -528,11 +528,11 @@ fn add_benches(group: &mut BenchmarkGroup<WallTime>, num_bytes: u64, direct_io: 
     );
 }
 
-fn open_standard(path: &Path, #[cfg(target_os = "linux")] direct_io: bool) -> File {
+fn open_standard(path: &Path, #[cfg(target_os = "linuxXXX")] direct_io: bool) -> File {
     let mut options = OpenOptions::new();
     options.write(true).create(true).truncate(true);
 
-    #[cfg(target_os = "linux")]
+    #[cfg(target_os = "linuxXXX")]
     if direct_io {
         use std::os::unix::fs::OpenOptionsExt;
         options.custom_flags(i32::try_from(rustix::pipe::PipeFlags::DIRECT.bits()).unwrap());
@@ -560,7 +560,7 @@ fn write_from_buffer(to: PathBuf, mut reader: BufReader<File>) {
     }
 }
 
-#[cfg(target_os = "linux")]
+#[cfg(target_os = "linuxXXX")]
 fn allocate(file: &File, len: u64) {
     use rustix::fs::{fallocate, FallocateFlags};
     fallocate(file, FallocateFlags::empty(), 0, len).unwrap();

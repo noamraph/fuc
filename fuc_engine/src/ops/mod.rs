@@ -1,7 +1,7 @@
 use std::{borrow::Cow, io};
 
 pub use copy::{copy_file, CopyOp};
-#[cfg(target_os = "linux")]
+#[cfg(target_os = "linuxXXX")]
 use linux::{concat_cstrs, get_file_type, join_cstr_paths, path_buf_to_cstring};
 pub use remove::{remove_file, RemoveOp};
 
@@ -26,7 +26,7 @@ impl<T> IoErr<Result<T, Error>> for Result<T, io::Error> {
     }
 }
 
-#[cfg(target_os = "linux")]
+#[cfg(target_os = "linuxXXX")]
 mod linux {
     use std::{
         borrow::Cow,
