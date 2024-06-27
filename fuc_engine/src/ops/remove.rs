@@ -112,7 +112,7 @@ fn schedule_deletions<'a, I: Into<Cow<'a, Path>>, F: IntoIterator<Item = I>>(
     Ok(())
 }
 
-#[cfg(target_os = "linuxXXX")]
+#[cfg(target_os = "linux")]
 mod compat {
     use std::{
         borrow::Cow,
@@ -423,7 +423,7 @@ mod compat {
     }
 }
 
-#[cfg(all(not(target_os = "linuxXXX"), not(target_os = "windows")))]
+#[cfg(all(not(target_os = "linux"), not(target_os = "windows")))]
 mod compat {
     use std::{borrow::Cow, fs, io, path::Path};
 

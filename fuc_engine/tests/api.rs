@@ -1,5 +1,5 @@
 #[test]
-#[cfg(target_os = "linuxXXX")]
+#[cfg(target_os = "linux")]
 fn api() {
     supercilex_tests::api();
 }

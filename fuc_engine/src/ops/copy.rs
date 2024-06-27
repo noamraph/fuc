@@ -140,7 +140,7 @@ fn schedule_copies<
     Ok(())
 }
 
-#[cfg(target_os = "linuxXXX")]
+#[cfg(target_os = "linux")]
 mod compat {
     use std::{
         borrow::Cow,
@@ -593,7 +593,7 @@ mod compat {
     }
 }
 
-#[cfg(not(target_os = "linuxXXX"))]
+#[cfg(not(target_os = "linux"))]
 mod compat {
     use std::{borrow::Cow, fs, io, path::Path};
 
