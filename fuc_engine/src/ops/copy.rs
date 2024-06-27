@@ -663,8 +663,8 @@ mod compat {
                 let to = to.join(dir_entry.file_name());
                 let mut file_type = dir_entry.file_type()?;
                 #[cfg(unix)]
-                if dbg!(dereference) && file_type.is_symlink() {
-                    file_type = fs::metadata(dir_entry.file_name())?.file_type();
+                if dereference && file_type.is_symlink() {
+                    file_type = fs::metadata(dir_entry.path())?.file_type();
                 }
                 let file_type = file_type;
 
